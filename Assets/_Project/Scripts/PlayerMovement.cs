@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 10f; // The speed at which the player moves
     public Camera playerCamera; // Reference to the player's camera
+    [SerializeField] float force = 4f;
 
-    private Rigidbody rb; // The rigidbody component of the ball
+    private Rigidbody player; // The rigidbody component of the ball
 
     void Start()
     {
         // Get the rigidbody component of the ball
-        rb = GetComponent<Rigidbody>();
+        player = GetComponent<Rigidbody>();
 
         // If the playerCamera is not set in the inspector, try to find it in the scene
         if (playerCamera == null)
@@ -23,16 +24,16 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Get the horizontal and vertical input axes
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        // Calculate the movement vector relative to the camera's orientation
-        Vector3 cameraForward = Vector3.Scale(playerCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 movement = (verticalInput * cameraForward + horizontalInput * playerCamera.transform.right) * speed * Time.fixedDeltaTime;
-
-        // Apply the movement to the ball's rigidbody
-        rb.MovePosition(transform.position + movement);
+        // speed multiplayer
+        Vector3 absoluteMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * force * Time.deltaTime * 100f;
+        // get Vector3 sample of camera
+        Vector3 cameraVector = playerCamera.transform.rotation * Vector3.forward;
+        // apply the direction of the camera and normalize it
+        Vector3 cameraDirection = new Vector3(cameraVector.x, 0f, cameraVector.z).normalized;
+        // rotate the absolute movement in accordance with the camera rotation
+        var playerMovement = Quaternion.FromToRotation(Vector3.forward, cameraDirection) * absoluteMovement;
+        // apply the force
+        player.AddForce(playerMovement);
     }
 
 }
