@@ -18,18 +18,27 @@ public class MenuManager : MonoBehaviour
 
     private void GameManagerOnGameStateChanged(GameState obj)
     {
-        //throw new System.NotImplementedException();
+
+        Debug.Log("Called ");
+        Debug.Log(obj);
     }
+
+    public void StartGame()
+    {
+        
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

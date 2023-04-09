@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
 
     private int score;
 
+    private int SCENE_START_MENU = 0;
+    private int SCENE_LEVEL_1 = 1; 
+    private int SCENE_LEVEL_2 = 2;
+
     void Awake()
     {
         Instance = this;
@@ -43,6 +47,9 @@ public class GameManager : MonoBehaviour
             case GameState.GameResuming:
                 HandleGameResuming();
                 break;
+            case GameState.GameStart:
+                HandleGameStart();
+                break;
             case GameState.GameFinished:
                 HandleGameFinished();
                 break;
@@ -53,24 +60,44 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
-    private void HandleStartMenu()
+    public void HandleStartMenu()
     {
-        // SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SCENE_START_MENU);
     }
 
-    private void HandlePauseMenu()
+    public void HandlePauseMenu()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void HandleGameStart()
+    {
+        SceneManager.LoadScene(SCENE_LEVEL_1);
+    }
+
+    public void HandleChangeLevel(int level)
+    {
+        int scene = SCENE_LEVEL_1;
+
+        if (level == 0) scene = SCENE_LEVEL_1;
+        else if (level == 1) scene = SCENE_LEVEL_2; 
+
+        SceneManager.LoadScene(scene);
+    }
+
+    public void HandleGameResuming()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void HandleGameFinished()
     {
 
     }
 
-    private void HandleGameResuming()
+    public void HandleExit()
     {
-
-    }
-
-    private void HandleGameFinished()
-    {
-
+        Application.Quit();
     }
 
     public void CollectPoint(int value)
@@ -83,6 +110,7 @@ public enum GameState
 {
     StartMenu,
     PauseMenu,
+    GameStart,
     GameResuming,
     GameFinished
 }
