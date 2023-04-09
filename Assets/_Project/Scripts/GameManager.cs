@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
 
+    private int score;
+
     void Awake()
     {
         Instance = this;
@@ -52,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleStartMenu()
     {
-
+        // SceneManager.LoadScene(1);
     }
 
     private void HandlePauseMenu()
@@ -68,6 +70,11 @@ public class GameManager : MonoBehaviour
     private void HandleGameFinished()
     {
 
+    }
+
+    public void CollectPoint(int value)
+    {
+        score += value;
     }
 }
 
