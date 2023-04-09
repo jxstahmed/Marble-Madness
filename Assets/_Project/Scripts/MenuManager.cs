@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
 
     private void GameManagerOnGameStateChanged(GameState obj)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     // Start is called before the first frame update
