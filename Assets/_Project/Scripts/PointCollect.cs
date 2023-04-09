@@ -17,7 +17,7 @@ public class PointCollect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score.text = points.ToString();
+        score.text = "Score: " + points.ToString();
     }
 
 }
