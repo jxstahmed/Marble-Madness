@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Point
   - Spike
+  - Door
   layers:
   - Default
   - TransparentFX
