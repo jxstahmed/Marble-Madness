@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -79,8 +80,12 @@ public class GameManager : MonoBehaviour
         HandleChangeLevel(DEFAULT_START_LEVEL);
     }
 
-    public void HandleChangeLevel(int level)
+    public async void HandleChangeLevel(int level)
     {
+        Time.timeScale = 0f;
+
+        await Task.Delay(1000);
+        
         Debug.Log(SCENE_PAUSE_MENU);
         Debug.Log(SCENE_LEVELS_1);
 
@@ -90,6 +95,8 @@ public class GameManager : MonoBehaviour
         else if (level == 2) scene = SCENE_LEVELS_2; 
 
         SceneManager.LoadScene(scene);
+        Time.timeScale = 1f;
+
     }
 
     public void HandleGameResuming()
