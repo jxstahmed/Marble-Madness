@@ -11,18 +11,26 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
+    public AudioSource pointCollectSound;
 
-    private int score;
+    private int score = 0;
 
     private int SCENE_START_MENU = 0;
     private int SCENE_PAUSE_MENU = 1;
     private int SCENE_LEVELS_1 = 2; 
     private int SCENE_LEVELS_2 = 3;
+
+    public int getScore()
+    {
+        return score;
+    }
+
     private int DEFAULT_START_LEVEL = 1;
 
     void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(this);
     }
 
     void Start()
@@ -56,6 +64,9 @@ public class GameManager : MonoBehaviour
             case GameState.GameFinished:
                 HandleGameFinished();
                 break;
+            case GameState.pointCollect:
+                HandlePointCollect();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -63,9 +74,16 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
+    private void HandlePointCollect()
+    {
+        score += 1;
+        pointCollectSound.Play();
+    }
+
     public void HandleStartMenu()
     {
         SceneManager.LoadScene(SCENE_START_MENU);
+
     }
 
     public void HandlePauseMenu()
@@ -127,5 +145,6 @@ public enum GameState
     PauseMenu,
     GameStart,
     GameResuming,
-    GameFinished
+    GameFinished,
+    pointCollect
 }

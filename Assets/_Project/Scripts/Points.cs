@@ -21,7 +21,7 @@ public class Points : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameObject.Find("Player").GetComponent<PointCollect>().points += pointValue;
+            GameManager.Instance.UpdateGameState(GameState.pointCollect);
             Destroy(gameObject);
         }
     }
