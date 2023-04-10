@@ -14,8 +14,10 @@ public class GameManager : MonoBehaviour
     private int score;
 
     private int SCENE_START_MENU = 0;
-    private int SCENE_LEVEL_1 = 1; 
-    private int SCENE_LEVEL_2 = 2;
+    private int SCENE_PAUSE_MENU = 1;
+    private int SCENE_LEVELS_1 = 2; 
+    private int SCENE_LEVELS_2 = 3;
+    private int DEFAULT_START_LEVEL = 1;
 
     void Awake()
     {
@@ -68,25 +70,31 @@ public class GameManager : MonoBehaviour
     public void HandlePauseMenu()
     {
         Time.timeScale = 0f;
+        SceneManager.LoadScene(SCENE_PAUSE_MENU, LoadSceneMode.Additive);
     }
 
     public void HandleGameStart()
     {
-        SceneManager.LoadScene(SCENE_LEVEL_1);
+        Debug.Log("Game start, loading level 1");
+        HandleChangeLevel(DEFAULT_START_LEVEL);
     }
 
     public void HandleChangeLevel(int level)
     {
-        int scene = SCENE_LEVEL_1;
+        Debug.Log(SCENE_PAUSE_MENU);
+        Debug.Log(SCENE_LEVELS_1);
 
-        if (level == 0) scene = SCENE_LEVEL_1;
-        else if (level == 1) scene = SCENE_LEVEL_2; 
+        int scene = SCENE_LEVELS_1;
+
+        if (level == 1) scene = SCENE_LEVELS_1;
+        else if (level == 2) scene = SCENE_LEVELS_2; 
 
         SceneManager.LoadScene(scene);
     }
 
     public void HandleGameResuming()
     {
+        SceneManager.UnloadSceneAsync(SCENE_PAUSE_MENU);
         Time.timeScale = 1f;
     }
 
