@@ -25,7 +25,7 @@ public class DoorOpener : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("Door").transform.position = startPosition + new Vector3(0, 0.5f, 0);
         isOpen = true;
-        Invoke(nameof(CloseDoor), 3);
+        Invoke(nameof(CloseDoor), 10);
     }
 
     public void CloseDoor()
