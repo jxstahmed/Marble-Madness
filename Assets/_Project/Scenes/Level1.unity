@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17339972, g: 0.21675532, b: 0.29882634, a: 1}
+  m_IndirectSpecularColor: {r: 0.17340006, g: 0.21675584, b: 0.29882762, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -490,7 +490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 901, y: 444.52}
+  m_AnchoredPosition: {x: 633, y: 266}
   m_SizeDelta: {x: 221.4801, y: 68.9689}
   m_Pivot: {x: 0.4999998, y: 0.49999937}
 --- !u!114 &77958186
@@ -613,14 +613,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99651309}
-  m_LocalRotation: {x: 0.22946171, y: 0.6688403, z: -0.22946173, w: 0.6688402}
+  m_LocalRotation: {x: 0.4848096, y: 0, z: 0, w: 0.8746197}
   m_LocalPosition: {x: -4.146865, y: 7.4897428, z: 1.9699986}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 37.872, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 58, y: 0, z: 0}
 --- !u!114 &99651313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,7 +635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 287754462}
   smoothSpeed: 0.125
-  offset: {x: -2, y: 2.5, z: 0}
+  offset: {x: 0, y: 3.5, z: -2}
 --- !u!82 &99651314
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1190,7 +1190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &269422373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1256,8 +1256,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638930996}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1445686898}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: HandleGameResuming
         m_Mode: 1
         m_Arguments:
@@ -1415,7 +1415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287754461}
   m_LocalRotation: {x: 0.02352748, y: 0.93868655, z: -0.008618597, w: 0.34386}
-  m_LocalPosition: {x: -0.01, y: 2.649, z: 4.43}
+  m_LocalPosition: {x: 0.02, y: 2.64, z: 5.16}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 99651311}
-  force: 4
+  force: 3
 --- !u!114 &287754468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1957,6 +1957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8095d99fee5a34d8ba7b3acf013adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sec: 10
 --- !u!108 &374071378
 Light:
   m_ObjectHideFlags: 0
@@ -2781,6 +2782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05f0c3e397281d409bfc92b4b5ebb63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextState: 8
 --- !u!1001 &561045813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3323,7 +3325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Restart level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5345,7 +5347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1215877646
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5411,8 +5413,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638930996}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1445686898}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: HandleGameRestart
         m_Mode: 1
         m_Arguments:
@@ -6049,6 +6051,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319f9b4c3b4537a4ca063e99c37f15b0, type: 3}
+--- !u!1 &1445686897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1445686899}
+  - component: {fileID: 1445686898}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1445686898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445686897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da6ed4962f2a1747a34aa589db8c991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseMenu: {fileID: 1985818666}
+--- !u!4 &1445686899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445686897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 734.5, y: 366, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1475325649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7171,7 +7218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointCollectSound: {fileID: 1638930998}
-  PauseMenu: {fileID: 1985818666}
 --- !u!4 &1638930997
 Transform:
   m_ObjectHideFlags: 0
@@ -8026,7 +8072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1769135439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8092,9 +8138,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2049134953870930510, guid: 366ab89097172de4da07f5ee2997b87d, type: 3}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: HandleGameResuming
+      - m_Target: {fileID: 1445686898}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: HandleExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9021,7 +9067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2025553291
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9697,7 +9743,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -917, y: 464}
+  m_AnchoredPosition: {x: -677, y: 277}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115573958
@@ -9744,8 +9790,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638930996}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1445686898}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: HandlePauseMenu
         m_Mode: 1
         m_Arguments:

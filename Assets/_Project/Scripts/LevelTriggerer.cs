@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class nextLevelScript : MonoBehaviour
+public class LevelTriggerer : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameState NextState;
+    
     void Start()
     {
         
@@ -20,7 +22,7 @@ public class nextLevelScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            GameManager.Instance.HandleChangeLevel(2);
+            GameManager.Instance.emitGameEvent(NextState);
         }
     }
 }
