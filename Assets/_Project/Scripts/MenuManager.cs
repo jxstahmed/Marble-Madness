@@ -142,6 +142,7 @@ public class MenuManager : MonoBehaviour
 
     public void HandleGameFinished()
     {
+        Task.Delay(1000);
         SceneManager.LoadScene(SCENE_FINISH);
     }
 
