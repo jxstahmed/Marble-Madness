@@ -21,7 +21,7 @@ public class Points : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.UpdateGameState(GameState.pointCollect);
+            GameManager.Instance.HandlePointCollect(pointValue);
             Destroy(gameObject);
         }
     }

@@ -9,75 +9,47 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
-    public GameState State;
-    public static event Action<GameState> OnGameStateChanged;
+
+    private GameState State;
+    public static event Action<GameState> GameEvent;
     public AudioSource pointCollectSound;
 
-    private int score = 0;
+    private int Score = 0;
 
     private int SCENE_START_MENU = 0;
-    private int SCENE_PAUSE_MENU = 1;
-    private int SCENE_LEVELS_1 = 2; 
-    private int SCENE_LEVELS_2 = 3;
+    private int SCENE_LEVELS_1 = 1; 
+    private int SCENE_LEVELS_2 = 2;
+
+    public GameObject PauseMenu;
+
+    private bool isPaused = false;
+    private bool isChangingLevel = false;
 
     public int getScore()
     {
-        return score;
+        return Score;
     }
 
     private int DEFAULT_START_LEVEL = 1;
 
     void Awake()
     {
-        Instance = this;
-        DontDestroyOnLoad(this);
-    }
-
-    void Start()
-    {
-        UpdateGameState(GameState.StartMenu);
-    }
-
-    void Update()
-    {
-        
-    }
-    
-    public void UpdateGameState(GameState newState)
-    {
-        State = newState;
-
-        switch (newState)
+        if(Instance == null)
         {
-            case GameState.StartMenu:
-                HandleStartMenu();
-                break;
-            case GameState.PauseMenu:
-                HandlePauseMenu();
-                break;
-            case GameState.GameResuming:
-                HandleGameResuming();
-                break;
-            case GameState.GameStart:
-                HandleGameStart();
-                break;
-            case GameState.GameFinished:
-                HandleGameFinished();
-                break;
-            case GameState.pointCollect:
-                HandlePointCollect();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+            Instance = this;
+            DontDestroyOnLoad(this);
         }
-
-        OnGameStateChanged?.Invoke(newState);
     }
 
-    private void HandlePointCollect()
+    public void HandlePointCollect(int value)
     {
-        score += 1;
-        pointCollectSound.Play();
+        Score += value;
+        if(pointCollectSound != null)
+        {
+            pointCollectSound.Play();
+        }
+        
+        emitGameEvent(GameState.CollectPoint);
     }
 
     public void HandleStartMenu()
@@ -88,40 +60,69 @@ public class GameManager : MonoBehaviour
 
     public void HandlePauseMenu()
     {
-        Time.timeScale = 0f;
-        SceneManager.LoadScene(SCENE_PAUSE_MENU, LoadSceneMode.Additive);
+  
+        if (PauseMenu != null)
+        {
+            // Adjust the boolean
+            isPaused = true;
+            // Pause the time
+            Time.timeScale = 0f;
+            // Show the menu
+            PauseMenu.SetActive(true);
+        }
+    }
+
+    public void HandleGameResuming()
+    {
+        if(isPaused)
+        {
+            if(PauseMenu != null)
+            {
+                // Hide the menu
+                PauseMenu.SetActive(false);
+                // Resume the game
+                Time.timeScale = 1f;
+                // Adjust the boolean
+                isPaused = false;
+            }
+
+        }
     }
 
     public void HandleGameStart()
     {
-        Debug.Log("Game start, loading level 1");
         HandleChangeLevel(DEFAULT_START_LEVEL);
     }
 
     public async void HandleChangeLevel(int level)
     {
+        // Avoid duplicated loading of levels
+        if (isChangingLevel) return;
+
+        // Adjust the boolean
+        isChangingLevel = true;
+
+        // Pause the game
         Time.timeScale = 0f;
 
+        // Delay, no idea why, ask the person who wrote this
         await Task.Delay(1000);
         
-        Debug.Log(SCENE_PAUSE_MENU);
-        Debug.Log(SCENE_LEVELS_1);
-
+        // Default scene
         int scene = SCENE_LEVELS_1;
 
         if (level == 1) scene = SCENE_LEVELS_1;
         else if (level == 2) scene = SCENE_LEVELS_2; 
 
         SceneManager.LoadScene(scene);
+
+        // Resume the game
         Time.timeScale = 1f;
 
+        // Adjust the boolean
+        isChangingLevel = false;
     }
 
-    public void HandleGameResuming()
-    {
-        SceneManager.UnloadSceneAsync(SCENE_PAUSE_MENU);
-        Time.timeScale = 1f;
-    }
 
     public void HandleGameFinished()
     {
@@ -133,9 +134,24 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void CollectPoint(int value)
+    public void emitGameEvent(GameState newState)
     {
-        score += value;
+
+        switch (newState)
+        {
+            case GameState.StartMenu:
+            case GameState.PauseMenu:
+            case GameState.GameResuming:
+            case GameState.GameStart:
+            case GameState.GameFinished:
+            case GameState.CollectPoint:
+                State = newState;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+        }
+
+        GameEvent?.Invoke(newState);
     }
 }
 
@@ -146,5 +162,5 @@ public enum GameState
     GameStart,
     GameResuming,
     GameFinished,
-    pointCollect
+    CollectPoint
 }
