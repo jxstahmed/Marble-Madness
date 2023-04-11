@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PointCollect : MonoBehaviour
 {
-    public Text ScoreText;
+    public TMP_Text ScoreText;
 
     // subscribe
     private void Awake()
