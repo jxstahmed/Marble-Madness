@@ -21,7 +21,11 @@ public class Points : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+<<<<<<< Updated upstream
             GameManager.Instance.UpdateGameState(GameState.pointCollect);
+=======
+            GameManager.Instance.HandlePointCollect(pointValue);
+>>>>>>> Stashed changes
             Destroy(gameObject);
         }
     }

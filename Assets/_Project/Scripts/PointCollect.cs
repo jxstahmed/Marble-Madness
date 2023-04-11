@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class PointCollect : MonoBehaviour
 {
-    [SerializeField] public int points = 0;
-    public Text score;
+    public Text ScoreText;
 
+<<<<<<< Updated upstream
     private void Awake()
     {
         GameManager.OnGameStateChanged += subscription;
@@ -23,7 +23,27 @@ public class PointCollect : MonoBehaviour
     {
         if(state == GameState.pointCollect)
             score.text = "Score: " + GameManager.Instance.getScore().ToString();
+=======
+    // subscribe
+    private void Awake()
+    {
+        GameManager.GameEvent += GameEventListener;
+    }
+>>>>>>> Stashed changes
 
+    // unsubscribe
+    private void onDestroy()
+    {
+        GameManager.GameEvent -= GameEventListener;
+    }
+    
+    private void GameEventListener(GameState obj)
+    {
+        Debug.Log(obj);
+        if(obj == GameState.CollectPoint)
+        {
+            ScoreText.text = "Score: " + GameManager.Instance.getScore().ToString();
+        }
     }
 
     // Start is called before the first frame update
