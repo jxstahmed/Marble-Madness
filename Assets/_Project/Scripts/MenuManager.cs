@@ -140,9 +140,10 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    public void HandleGameFinished()
+    public async void HandleGameFinished()
     {
-        Task.Delay(1000);
+        Time.timeScale = 0f;
+        await Task.Delay(1000);
         SceneManager.LoadScene(SCENE_FINISH);
     }
 
