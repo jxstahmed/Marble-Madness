@@ -2,86 +2,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
-    public GameState State;
-    public static event Action<GameState> OnGameStateChanged;
 
-    private int score;
+    private GameState State;
+    public static event Action<GameState> GameEvent;
+
+    public int DEFAULT_RESTART_LEVEL = 1;
+    private int Score = 0;
+
+
+    public int getScore()
+    {
+        return Score;
+    }
+
+    public void SetScore(int score)
+    {
+        Score = score;
+    }
 
     void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+            
+            DontDestroyOnLoad(gameObject);
+        } else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void Start()
+    public void HandlePointCollect(int value)
     {
-        UpdateGameState(GameState.StartMenu);
+        Score += value;
+        emitGameEvent(GameState.CollectPoint);
     }
 
-    void Update()
+  
+ 
+    public void emitGameEvent(GameState newState)
     {
-
-    }
-    
-    public void UpdateGameState(GameState newState)
-    {
-        State = newState;
 
         switch (newState)
         {
             case GameState.StartMenu:
-                HandleStartMenu();
-                break;
             case GameState.PauseMenu:
-                HandlePauseMenu();
-                break;
             case GameState.GameResuming:
-                HandleGameResuming();
-                break;
+            case GameState.GameStart:
+            case GameState.GameRestart:
             case GameState.GameFinished:
-                HandleGameFinished();
+            case GameState.StartLevel1:
+            case GameState.StartLevel2:
+            case GameState.CollectPoint:
+                State = newState;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
 
-        OnGameStateChanged?.Invoke(newState);
-    }
-
-    private void HandleStartMenu()
-    {
-        // SceneManager.LoadScene(1);
-    }
-
-    private void HandlePauseMenu()
-    {
-
-    }
-
-    private void HandleGameResuming()
-    {
-
-    }
-
-    private void HandleGameFinished()
-    {
-
-    }
-
-    public void CollectPoint(int value)
-    {
-        score += value;
+        GameEvent?.Invoke(newState);
     }
 }
+
+
 
 public enum GameState
 {
     StartMenu,
     PauseMenu,
+    GameStart,
     GameResuming,
-    GameFinished
+    GameRestart,
+    GameFinished,
+    CollectPoint,
+    StartLevel1,
+    StartLevel2
 }
