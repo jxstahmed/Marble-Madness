@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
 
     private GameState State;
     public static event Action<GameState> GameEvent;
-    
 
+    public int DEFAULT_RESTART_LEVEL = 1;
     private int Score = 0;
 
 

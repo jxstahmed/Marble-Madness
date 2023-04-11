@@ -18,7 +18,6 @@ public class MenuManager : MonoBehaviour
     private bool isChangingLevel = false;
 
     private int DEFAULT_START_LEVEL = 1;
-    private int DEFAULT_RESTART_LEVEL = 1;
 
     public GameObject PauseMenu;
 
@@ -104,7 +103,7 @@ public class MenuManager : MonoBehaviour
     public void HandleGameRestart()
     {
         GameManager.Instance.SetScore(0);
-        HandleChangeLevel(DEFAULT_RESTART_LEVEL);
+        HandleChangeLevel(GameManager.Instance.DEFAULT_RESTART_LEVEL);
     }
 
     public async void HandleChangeLevel(int level)
@@ -126,9 +125,9 @@ public class MenuManager : MonoBehaviour
 
         if (level == 1) scene = SCENE_LEVELS_1;
         else if (level == 2) scene = SCENE_LEVELS_2;
-        
+
         // useful for restart level
-        DEFAULT_RESTART_LEVEL = scene;
+        GameManager.Instance.DEFAULT_RESTART_LEVEL = scene;
 
         SceneManager.LoadScene(scene);
         GameManager.Instance.SetScore(0);
