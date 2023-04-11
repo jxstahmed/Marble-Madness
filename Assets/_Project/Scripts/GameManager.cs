@@ -31,13 +31,13 @@ public class GameManager : MonoBehaviour
     }
 
     private int DEFAULT_START_LEVEL = 1;
+    private int _current_level = 1;
 
     void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
     }
 
@@ -68,7 +68,25 @@ public class GameManager : MonoBehaviour
             // Pause the time
             Time.timeScale = 0f;
             // Show the menu
-            PauseMenu.SetActive(true);
+            showPauseMenu();
+        }
+    }
+
+    private void showPauseMenu()
+    {
+        PauseMenu.SetActive(true);
+        foreach(Transform transform in PauseMenu.transform)
+        {
+            transform.gameObject.SetActive(true);
+        }
+    }
+
+    private void hidePauseMenu()
+    {
+        PauseMenu.SetActive(false);
+        foreach (Transform transform in PauseMenu.transform)
+        {
+            transform.gameObject.SetActive(false);
         }
     }
 
@@ -79,9 +97,11 @@ public class GameManager : MonoBehaviour
             if(PauseMenu != null)
             {
                 // Hide the menu
-                PauseMenu.SetActive(false);
+                hidePauseMenu();
+
                 // Resume the game
                 Time.timeScale = 1f;
+
                 // Adjust the boolean
                 isPaused = false;
             }
@@ -121,12 +141,19 @@ public class GameManager : MonoBehaviour
 
         // Adjust the boolean
         isChangingLevel = false;
+        _current_level = scene;
     }
 
 
     public void HandleGameFinished()
     {
 
+    }
+
+    public void HandleGameRestart()
+    {
+        Score = 0;
+        HandleChangeLevel(_current_level);
     }
 
     public void HandleExit()
@@ -143,6 +170,7 @@ public class GameManager : MonoBehaviour
             case GameState.PauseMenu:
             case GameState.GameResuming:
             case GameState.GameStart:
+            case GameState.GameRestart:
             case GameState.GameFinished:
             case GameState.CollectPoint:
                 State = newState;
@@ -155,12 +183,15 @@ public class GameManager : MonoBehaviour
     }
 }
 
+
+
 public enum GameState
 {
     StartMenu,
     PauseMenu,
     GameStart,
     GameResuming,
+    GameRestart,
     GameFinished,
     CollectPoint
 }
