@@ -8,7 +8,6 @@ TagManager:
   - Spike
   - Door
   - RotateSpike
-  - PauseMenu
   layers:
   - Default
   - TransparentFX
