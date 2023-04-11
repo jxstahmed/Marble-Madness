@@ -52,6 +52,7 @@ public class MenuManager : MonoBehaviour
 
     public void HandleStartMenu()
     {
+        
         SceneManager.LoadScene(SCENE_START_MENU);
 
     }
@@ -95,6 +96,7 @@ public class MenuManager : MonoBehaviour
 
     public void HandleGameStart()
     {
+        GameManager.Instance.SetScore(0);
         HandleChangeLevel(DEFAULT_START_LEVEL);
     }
 
@@ -129,6 +131,7 @@ public class MenuManager : MonoBehaviour
         DEFAULT_RESTART_LEVEL = scene;
 
         SceneManager.LoadScene(scene);
+        GameManager.Instance.SetScore(0);
 
         // Resume the game
         Time.timeScale = 1f;

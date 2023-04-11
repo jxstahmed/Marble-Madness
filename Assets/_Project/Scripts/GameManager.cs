@@ -12,11 +12,9 @@ public class GameManager : MonoBehaviour
 
     private GameState State;
     public static event Action<GameState> GameEvent;
-    public AudioSource pointCollectSound;
+    
 
     private int Score = 0;
-
-
 
 
     public int getScore()
@@ -45,11 +43,6 @@ public class GameManager : MonoBehaviour
     public void HandlePointCollect(int value)
     {
         Score += value;
-        if(pointCollectSound != null)
-        {
-            pointCollectSound.Play();
-        }
-        
         emitGameEvent(GameState.CollectPoint);
     }
 
