@@ -8,6 +8,8 @@ public class DoorOpener : MonoBehaviour
     private Vector3 startPosition;
     private bool isOpen = false;
 
+    public int sec = 10;
+
     private void Start()
     {
         startPosition = GameObject.FindGameObjectWithTag("Door").transform.position;
@@ -25,7 +27,7 @@ public class DoorOpener : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("Door").transform.position = startPosition + new Vector3(0, 0.5f, 0);
         isOpen = true;
-        Invoke(nameof(CloseDoor), 10);
+        Invoke(nameof(CloseDoor), sec);
     }
 
     public void CloseDoor()

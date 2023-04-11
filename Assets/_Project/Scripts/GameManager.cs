@@ -38,7 +38,11 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
+            //DontDestroyOnLoad(gameObject);
+         
         }
+        
+        
     }
 
     public void HandlePointCollect(int value)
@@ -60,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void HandlePauseMenu()
     {
+        Debug.Log("Pause clicked");
   
         if (PauseMenu != null)
         {
